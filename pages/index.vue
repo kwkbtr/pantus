@@ -2,6 +2,13 @@
   <main>
     <NavBar />
     <h1>数量管理</h1>
+    <h2>ストック切れ</h2>
+    <ul>
+      <li v-for="item in outOfStockItems" :key="item.id">
+        {{ item.name }} <button @click="add(item)">買った</button>
+      </li>
+    </ul>
+    <h2>全項目</h2>
     <ul>
       <li v-for="category in categories" :key="category.id">
         <details>
@@ -31,6 +38,11 @@ export default {
     return {
       categories: [],
       items: []
+    }
+  },
+  computed: {
+    outOfStockItems() {
+      return this.items.filter((item) => item && !(item.quantity > 0))
     }
   },
   firestore: {

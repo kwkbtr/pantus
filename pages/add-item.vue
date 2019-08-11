@@ -65,7 +65,7 @@ export default {
       const name = this.name
       const categories = this.itemCategories
       if (name.length > 0 && categories.length > 0) {
-        db.collection('items').add({ name, categories })
+        db.collection('items').add({ name, categories, quantity: 0 })
         this.name = ''
       }
     }
